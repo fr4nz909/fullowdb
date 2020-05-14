@@ -2,7 +2,7 @@ defmodule Fullowdb.Media.Story do
     use Ecto.Schema
     @timestamps_opts [type: :utc_datetime]
 
-    @doc  "The list of all available Stories"
+    @doc  "The list of all available Stories hehe"
     schema "stories" do
         field :is_photo, :boolean
         field :media_url, :string
