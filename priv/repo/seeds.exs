@@ -1,0 +1,1 @@
+Fullowdb.Seeds.run()
