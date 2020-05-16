@@ -25,6 +25,7 @@ defmodule Fullowdb.Schema do
 
         @desc "The list of all available Articles"
         field :articles, list_of(:article) do
+          arg :filter, :article_filter
           arg :matching, :string
           resolve &Resolvers.Fanshop.list_articles/3
         end
@@ -54,6 +55,22 @@ defmodule Fullowdb.Schema do
     enum :sort_order do
       value :asc
       value :desc
+    end
+
+    @desc "Filtering options for the articles list"
+    input_object :article_filter do
+      @desc "Matching a Name"
+      field :username, :string
+
+      @desc "Matching a Tag"
+      field :tag, :string
+
+      @desc "Priced above a Value"
+      field :priced_above, :float
+
+      @desc "Priced below a Value"
+      field :priced_below, :float
+
     end
 
 end
