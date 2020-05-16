@@ -12,12 +12,14 @@ defmodule Fullowdb.Schema do
       @desc  "The list of all available Users"
       field :users, list_of(:user) do
         arg :matching, :string
+        arg :order, type: :sort_order, default_value: :asc
         resolve &Resolvers.Account.list_users/3
       end
 
         @desc  "The list of all available Posts"
         field :posts, list_of(:post) do
           arg :matching, :string
+          arg :order, type: :sort_order, default_value: :asc
           resolve &Resolvers.Media.list_posts/3
       end
 
@@ -47,6 +49,11 @@ defmodule Fullowdb.Schema do
         field :id, :id
         field :name, :string
         field :price, :float
+    end
+
+    enum :sort_order do
+      value :asc
+      value :desc
     end
 
 end

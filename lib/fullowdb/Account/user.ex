@@ -22,7 +22,7 @@ defmodule Fullowdb.Account.User do
 
         has_many :posts, Fullowdb.Media.Post
         has_many :stories, Fullowdb.Media.Story
-        has_many :articles, Fullowdb.Media.Article
+        has_many :articles, Fullowdb.Fanshop.Article
   end
 
   @doc false

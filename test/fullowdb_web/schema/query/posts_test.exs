@@ -18,8 +18,10 @@ defmodule FullowdbWeb.Schema.Query.PostsTest do
         assert json_response(conn, 200) == %{
             "data" => %{
                 "posts" => [
-                    %{"text" => "Hello again, World!"},
-                    %{"text" => "hello"},
+                    %{"text" => "A Post"},
+                    %{"text" => "B Post"},
+                    %{"text" => "C Post"}, 
+                    %{"text" => "D Post"},
                 ]
             }
         }
@@ -32,13 +34,13 @@ defmodule FullowdbWeb.Schema.Query.PostsTest do
         }
     }
   """
-  @variables %{"term" => "Wor"}
+  @variables %{"term" => "C"}
   test "posts field returns posts filtered by text with using a variable" do
       response = get(build_conn(), "/api", query: @query, variables: @variables)
       assert json_response(response, 200) == %{
           "data" => %{
               "posts" => [
-                  %{"text" => "Hello again, World!"},
+                  %{"text" => "C Post"},
               ]
           }
       }
@@ -57,6 +59,35 @@ defmodule FullowdbWeb.Schema.Query.PostsTest do
             %{"message" => message}
         ]} = json_response(response, 200)
         assert message == "Argument \"matching\" has invalid value 123."
+    end
+
+    @query """
+    {
+        posts (order: DESC) {
+            text
+        }
+    }
+    """
+    test "posts field returns posts descending using literals" do
+        response = get(build_conn(), "/api", query: @query)
+        assert %{
+            "data" => %{"posts" => [%{"text" => "D Post"} | _]}  
+        } = json_response(response, 200)
+    end
+
+    @query """
+    query ($order: SortOrder!){
+        posts (order: $order) {
+            text
+        }
+    }
+    """
+    @variables %{"order" => "DESC"}
+    test "posts field returns posts descending using variables" do
+        response = get(build_conn(), "/api", query: @query, variables: @variables)
+        assert %{
+            "data" => %{"posts" => [%{"text" => "D Post"} | _]}  
+        } = json_response(response, 200)
     end
 
 end

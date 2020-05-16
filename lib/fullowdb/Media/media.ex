@@ -4,9 +4,16 @@ defmodule Fullowdb.Media do
 
 
     alias Fullowdb.Media.Post
-    def list_posts(%{matching: text}) when is_binary(text) do
-        Post
-        |> where([m], ilike(m.text, ^"%#{text}%"))
+    def list_posts(filters) do
+        filters
+        |> Enum.reduce(Post, fn
+            {_, nil}, query ->
+                query
+                {:order, order}, query ->
+                from q in query, order_by: {^order, :text}
+                {:matching, text}, query ->
+                    from q in query, where: ilike(q.text, ^"%#{text}%")
+                end)
         |> Repo.all
     end
 
