@@ -18,8 +18,7 @@ defmodule Fullowdb.Schema do
 
         @desc  "The list of all available Posts"
         field :posts, list_of(:post) do
-          arg :filter, :post_filter
-          arg :matching, :string
+          arg :filter, non_null(:post_filter)
           arg :order, type: :sort_order, default_value: :asc
           resolve &Resolvers.Media.list_posts/3
       end
@@ -40,6 +39,7 @@ defmodule Fullowdb.Schema do
     object :post do
         field :id, :id
         field :text, :string
+        field :added_on, :date
     end
 
     object :story do
@@ -82,6 +82,27 @@ defmodule Fullowdb.Schema do
       @desc "Matching a Tag"
       field :tag, :string
 
+      @desc "Post added before this date"
+      field :added_before, :date
+
+      @desc "Post added after this date"
+      field :added_after, :date
+
     end
+
+    scalar :date do
+      parse fn input ->
+        #Parsing the input
+        case Date.from_iso8601(input.value) do
+          {:ok, date} -> {:ok, date}
+          _ -> :error
+        end
+    end
+
+    serialize fn date ->
+      # Serializing logic for output after elixir processing
+      Date.to_iso8601(date)
+    end
+  end
 
 end

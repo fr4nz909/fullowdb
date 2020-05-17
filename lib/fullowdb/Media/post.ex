@@ -11,6 +11,7 @@ defmodule Fullowdb.Media.Post do
         field :media_url, :string
         field :text, :string
         field :is_premium, :boolean
+        field :added_on, :date
 
         timestamps()
 
