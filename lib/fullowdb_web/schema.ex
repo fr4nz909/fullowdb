@@ -34,11 +34,13 @@ defmodule Fullowdb.Schema do
     object :user do
         field :id, :id
         field :username, :string
+        field :posts, list_of(:post)
     end
 
     object :post do
         field :id, :id
         field :text, :string
+        field :user, :user
         field :added_on, :date
     end
 
