@@ -28,13 +28,13 @@ defmodule FullowdbWeb.Schema.Query.PostsTest do
     end
 
     @query """
-    query ($term: String) {
-        posts (matching: $term) {
+    query ($filter: PostFilter!) {
+        posts (filter: $filter) {
           text
         }
     }
   """
-  @variables %{"term" => "C"}
+  @variables %{filter: %{"text" => "C"}}
   test "posts field returns posts filtered by text with using a variable" do
       response = get(build_conn(), "/api", query: @query, variables: @variables)
       assert json_response(response, 200) == %{
@@ -88,6 +88,20 @@ defmodule FullowdbWeb.Schema.Query.PostsTest do
         assert %{
             "data" => %{"posts" => [%{"text" => "D Post"} | _]}  
         } = json_response(response, 200)
+    end
+
+    @query """
+    {
+        posts (filter: {tag: "A Blonde"}) {
+            text
+        }
+    }
+    """
+    test "Posts field returns Posts (with tags), filtering with a literal" do
+        response = get(build_conn(), "/api", query: @query)
+        assert %{
+            "data" => %{"posts" => [%{"text" => "A Post"}]}
+        } == json_response(response, 200)
     end
 
 end

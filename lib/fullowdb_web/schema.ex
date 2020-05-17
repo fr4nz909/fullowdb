@@ -18,6 +18,7 @@ defmodule Fullowdb.Schema do
 
         @desc  "The list of all available Posts"
         field :posts, list_of(:post) do
+          arg :filter, :post_filter
           arg :matching, :string
           arg :order, type: :sort_order, default_value: :asc
           resolve &Resolvers.Media.list_posts/3
@@ -70,6 +71,16 @@ defmodule Fullowdb.Schema do
 
       @desc "Priced below a Value"
       field :priced_below, :float
+
+    end
+
+    @desc "Filtering options for the post list"
+    input_object :post_filter do
+      @desc "Matching a Text"
+      field :text, :string
+
+      @desc "Matching a Tag"
+      field :tag, :string
 
     end
 
