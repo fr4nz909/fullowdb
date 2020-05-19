@@ -1,4 +1,4 @@
-defmodule Fullowdb.Resolvers.Account do
+defmodule FullowdbWeb.Resolvers.Account do
     alias Fullowdb.Account
     
     def list_users(_, args, _) do
