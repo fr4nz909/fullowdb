@@ -1,4 +1,4 @@
-defmodule Fullowdb.Resolvers.Media do
+defmodule FullowdbWeb.Resolvers.Media do
     alias Fullowdb.Media
     
     def list_posts(_, args, _) do

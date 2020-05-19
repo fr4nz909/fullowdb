@@ -1,4 +1,4 @@
-defmodule Fullowdb.Resolvers.Fanshop do
+defmodule FullowdbWeb.Resolvers.Fanshop do
     alias Fullowdb.Fanshop
     
     def list_articles(_, args, _) do
