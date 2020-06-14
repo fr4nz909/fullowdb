@@ -6,6 +6,7 @@ defmodule FullowdbWeb.Schema.AccountTypes do
 
     @desc  "The list of all available Users"
     field :users, list_of(:user) do
+        arg :matching_id, :string
         arg :matching, :string
         arg :order, type: :sort_order, default_value: :asc
         resolve &Resolvers.Account.list_users/3

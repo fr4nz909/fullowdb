@@ -4,8 +4,8 @@ defmodule Fullowdb.Repo.Migrations.AddPostTable do
   def change do
     create table(:posts) do
       add :media_type, :integer
-      add :media_url, :string
-      add :text, :string
+      add :post_media, {:array, :string}
+      add :post_text, :string
       add :is_premium, :boolean
 
       timestamps()

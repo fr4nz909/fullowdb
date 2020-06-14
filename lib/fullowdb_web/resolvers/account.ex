@@ -4,4 +4,5 @@ defmodule FullowdbWeb.Resolvers.Account do
     def list_users(_, args, _) do
         {:ok, Account.list_users(args)}
     end
+
 end

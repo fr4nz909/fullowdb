@@ -30,5 +30,6 @@ defmodule Fullowdb.Account.User do
     user
     |> cast(attrs, [:username, :first_name, :last_name, :country_code, :date_of_birth, :email, :password])
     |> validate_required([:username, :date_of_birth, :email, :password])
+    |> unique_constraint(:name)
   end
 end

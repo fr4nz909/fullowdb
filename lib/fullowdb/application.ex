@@ -6,6 +6,7 @@ defmodule Fullowdb.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
     children = [
       # Start the Ecto repository
       Fullowdb.Repo,

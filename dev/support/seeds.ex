@@ -39,20 +39,20 @@ defmodule Fullowdb.Seeds do
         # POSTS
         #
 
-        firstpost =
-        %Media.Post{text: "A Post", user: ferentine, tags: [firsttag]}
+        _firstpost =
+        %Media.Post{post_text: "A Post", user: ferentine, tags: [firsttag], post_media: ["https://www.time-4-dogs.com/s/img/emotionheader8192839.jpg?1483389627.920px.607px",]}
         |> Repo.insert!
 
-        secondpost =
-        %Media.Post{text: "B Post", user: martina, tags: [secondtag]}
+        _secondpost =
+        %Media.Post{post_text: "B Post", user: martina, tags: [secondtag], post_media: ["https://senco-dogs.de/wp-content/uploads/2019/10/Senco-Dogs-Ausbildungszentrum.jpg",]}
         |> Repo.insert!
 
-        thirdpost =
-        %Media.Post{text: "C Post", user: martina, tags: [thirdtag]}
+        _thirdpost =
+        %Media.Post{post_text: "C Post", user: martina, tags: [thirdtag], post_media: ["https://www.martinruetter.com/fileadmin/_processed_/csm_0Y6A0455web_Fotor_Fotor_5a63c6fa8c.jpg",]}
         |> Repo.insert!
 
-        fourthpost =
-        %Media.Post{text: "D Post", user: ferentine, tags: [fourthtag]}
+        _fourthpost =
+        %Media.Post{post_text: "D Post", user: ferentine, tags: [fourthtag], post_media: ["https://cdn.prod.www.spiegel.de/images/a305eaa3-1cec-4101-b08d-20b7074efe2a_w1200_r1_fpx65.97_fpy52.85.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f7/Stack_Overflow_logo.png"]}
         |> Repo.insert!
 
         :ok

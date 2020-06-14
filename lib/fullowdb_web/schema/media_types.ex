@@ -1,11 +1,12 @@
 defmodule FullowdbWeb.Schema.MediaTypes do
     use Absinthe.Schema.Notation
+
     alias FullowdbWeb.Resolvers
 
     @desc "Filtering options for the post list"
     input_object :post_filter do
-      @desc "Matching a Text"
-      field :text, :string
+      @desc "Matching a Post-Text"
+      field :post_text, :string
 
       @desc "Matching a Tag"
       field :tag, :string
@@ -33,13 +34,44 @@ defmodule FullowdbWeb.Schema.MediaTypes do
 
     object :post do
         field :id, :id
-        field :text, :string
+        field :post_text, :string
+        field :post_media, list_of(:string)
+        field :inserted_at, :date
         field :user, :user
-        field :added_on, :date
     end
 
     object :story do
         field :id, :id
         field :text, :string
     end
-end
+
+    object :tag do
+        field :name, :string
+        field :description, :string
+        field :posts, list_of(:post) do
+            resolve &Resolvers.Media.posts_for_tag/3
+        end
+    end
+
+    interface :search_result do
+        field :name, :string
+        resolve_type fn
+            %Fullowdb.Media.Post{}, _ ->
+                :post
+            %Fullowdb.Tagging.Tag{}, _ ->
+                :tag
+            _, _ ->
+                nil
+            end
+        end
+
+        input_object :post_input do
+            field :text, non_null(:string)
+            field :user_id, non_null(:id)
+        end
+
+        input_object :story_input do
+            field :text, non_null(:string)
+            field :user_id, non_null(:id)
+        end
+    end

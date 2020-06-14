@@ -1,6 +1,8 @@
 defmodule FullowdbWeb.Schema.FanshopTypes do
     use Absinthe.Schema.Notation
 
+    alias FullowdbWeb.Resolvers
+
     @desc "Filtering options for the articles list"
     input_object :article_filter do
       @desc "Matching a Name"
@@ -32,7 +34,18 @@ defmodule FullowdbWeb.Schema.FanshopTypes do
 
     object :article do
         field :id, :id
+        field :name, non_null(:string)
+        field :media_url, non_null(:string)
+        field :description, :string
+        field :price, non_null(:float)
+    end
+
+    input_object :article_input do
         field :name, :string
+        field :description, :string
+        field :media_url, :string
         field :price, :float
+
+        field :user_id, :id
     end
 end

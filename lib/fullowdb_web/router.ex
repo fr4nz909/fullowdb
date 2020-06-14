@@ -11,6 +11,7 @@ defmodule FullowdbWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug, origin: ["http://localhost:3000", "http://127.0.0.1:3000"]
   end
 
   scope "/" do

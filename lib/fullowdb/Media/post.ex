@@ -8,8 +8,8 @@ defmodule Fullowdb.Media.Post do
     @doc  "The list of all available Posts"
     schema "posts" do
         field :is_photo, :boolean
-        field :media_url, :string
-        field :text, :string
+        field :post_media, {:array, :string}
+        field :post_text, :string
         field :is_premium, :boolean
         field :added_on, :date
 
@@ -24,7 +24,7 @@ defmodule Fullowdb.Media.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:text, :media_url, :is_premium])
-    |> validate_required([:text, :is_premium, :media_url])
+    |> cast(attrs, [:post_text, :post_media, :is_premium])
+    |> validate_required([:post_text])
   end
 end

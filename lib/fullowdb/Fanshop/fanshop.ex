@@ -3,6 +3,13 @@ defmodule Fullowdb.Fanshop do
     alias Fullowdb.Repo
 
     alias Fullowdb.Fanshop.Article
+
+    def create_article(attrs \\ %{}) do
+        %Article{}
+        |> Article.changeset(attrs)
+        |> Repo.insert()
+    end
+
     def list_articles(args) do
         args
         |> Enum.reduce(Article, fn

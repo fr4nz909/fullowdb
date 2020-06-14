@@ -9,7 +9,7 @@ defmodule Fullowdb.Fanshop.Article do
         field :name, :string
         field :description, :string
         field :price, :float
-        field :media_url, :string
+        field :article_media, {:array, :string}
 
         timestamps()
 
@@ -19,8 +19,8 @@ defmodule Fullowdb.Fanshop.Article do
     @doc false
     def changeset(%Article{} = article, attrs) do
       article
-      |> cast(attrs, [:name, :description, :price, :media_url])
-      |> validate_required([:name, :description, :price, :media_url])
+      |> cast(attrs, [:name, :description, :price, :article_media])
+      |> validate_required([:name, :description, :price, :article_media])
       |> foreign_key_constraint(:user)
     end
 end
