@@ -8,6 +8,8 @@ defmodule Fullowdb.Repo.Migrations.AddStoryTable do
       add :story_text, :string
       add :is_premium, :boolean
 
+      add :user_id, references(:users)
+
       timestamps()
     end
   end

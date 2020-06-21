@@ -8,6 +8,8 @@ defmodule Fullowdb.Repo.Migrations.AddArticleTable do
       add :price, :float, null: false
       add :article_media, {:array, :string}, null: false
 
+      add :user_id, references(:users)
+
       timestamps()
     end
   end

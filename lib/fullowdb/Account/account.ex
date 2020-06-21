@@ -2,8 +2,13 @@ defmodule Fullowdb.Account do
     import Ecto.Query, warn: false
     alias Fullowdb.Repo
 
-
     alias Fullowdb.Account.User
+
+    def create_user(attrs \\ %{}) do
+        %User{}
+        |> User.changeset(attrs)
+        |> Repo.insert()
+    end
 
     def list_users(filters) do
         filters

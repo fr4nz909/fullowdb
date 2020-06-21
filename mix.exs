@@ -47,7 +47,9 @@ defmodule Fullowdb.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4.0"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:comeonin, "~> 4.0"},
+      {:argon2_elixir, "~> 1.2"},
     ]
   end
 

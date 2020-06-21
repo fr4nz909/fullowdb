@@ -5,14 +5,15 @@ defmodule Fullowdb.Seeds do
 
         #
         # USERS
-        #
+        # User.changeset(%User{}, %{username: "Harry", 
+        # date_of_birth: "2000-12-12", email: "harry@potter.com", password: "password", password_confirmation: "password"})
 
         ferentine =
-        %Account.User{username: "A Ferentine"}
+        %Account.User{username: "A Ferentine", date_of_birth: "1999-24-10", email: "ferentine@tine.com", password: "password", password_confirmation: "password"}
         |> Repo.insert!
 
         martina =
-        %Account.User{username: "B Martina666"}
+        %Account.User{username: "B Martina666", date_of_birth: "1996-24-10", email: "martina@tine.com", password: "password", password_confirmation: "password"}
         |> Repo.insert!
 
         #
