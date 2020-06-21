@@ -4,9 +4,7 @@ defmodule Fullowdb.Schema do
     alias Fullowdb.{Repo, Account.User, Media.Post, Media.Story, Fanshop.Article}
     alias FullowdbWeb.Resolvers
 
-    import_types FullowdbWeb.Schema.AccountTypes
-    import_types FullowdbWeb.Schema.MediaTypes
-    import_types FullowdbWeb.Schema.FanshopTypes
+    import_types(FullowdbWeb.Schema.Types)
 
     @desc  "The entrypoint to all Queries"
     

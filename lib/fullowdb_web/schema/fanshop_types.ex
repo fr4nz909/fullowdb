@@ -1,4 +1,4 @@
-defmodule FullowdbWeb.Schema.FanshopTypes do
+defmodule FullowdbWeb.Schema.Types.FanshopTypes do
     use Absinthe.Schema.Notation
 
     alias FullowdbWeb.Resolvers

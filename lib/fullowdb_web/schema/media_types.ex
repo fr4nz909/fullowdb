@@ -1,4 +1,4 @@
-defmodule FullowdbWeb.Schema.MediaTypes do
+defmodule FullowdbWeb.Schema.Types.MediaTypes do
     use Absinthe.Schema.Notation
 
     alias FullowdbWeb.Resolvers
