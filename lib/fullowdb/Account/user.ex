@@ -8,13 +8,6 @@ defmodule Fullowdb.Account.User do
     schema "users" do
         field :username, :string, unique: true
 
-        field :first_name, :string
-        field :last_name, :string
-        field :street_name, :string
-        field :street_number, :string
-        field :post_code, :string
-        field :city, :string
-        field :country_code, :integer
         field :date_of_birth, :string
         field :email, :string
 
@@ -35,8 +28,7 @@ defmodule Fullowdb.Account.User do
   def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [
-      :username, :first_name, :last_name, :street_name, :street_number,
-      :post_code, :city, :country_code, :date_of_birth, :email,
+      :username, :date_of_birth, :email,
       :role, :password, :password_confirmation
     ])
     |> validate_required([:username, :date_of_birth, :email, :role, :password, :password_confirmation])

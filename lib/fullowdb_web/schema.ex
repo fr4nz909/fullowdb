@@ -24,17 +24,26 @@ defmodule Fullowdb.Schema do
     mutation do
       # Mutation fields for writing into database
 
-      field :create_post, :post do
+      @desc "Register a new user"
+      field :create_user, type: :user do
+        arg :input, non_null(:user_input)
+        resolve &Resolvers.Account.create_user/3
+      end
+
+      @desc "Create a new post"
+      field :create_post, type: :post do
        arg :input, non_null(:post_input)
        resolve &Resolvers.Media.create_post/3 
       end
 
-      field :create_story, :story do
+      @desc "Create a new story"
+      field :create_story, type: :story do
         arg :input, non_null(:story_input)
         resolve &Resolvers.Media.create_story/3 
        end
 
-       field :create_article, :article do
+       @desc "Create a new article"
+       field :create_article, type: :article do
         arg :input, non_null(:article_input)
         resolve &Resolvers.Fanshop.create_article/3 
        end
