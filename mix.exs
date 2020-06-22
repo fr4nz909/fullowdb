@@ -50,6 +50,7 @@ defmodule Fullowdb.MixProject do
       {:cors_plug, "~> 1.5"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
+      {:guardian, "~> 2.0"},
     ]
   end
 

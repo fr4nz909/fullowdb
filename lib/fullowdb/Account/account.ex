@@ -26,4 +26,6 @@ defmodule Fullowdb.Account do
     def list_users(_) do
         Repo.all(User)
     end
+
+    def get_user!(id), do: Repo.get!(User, id)
 end

@@ -23,6 +23,12 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Guardian Config details
+config :fullowdb, Fullowdb.Guardian,
+       issuer: "fullowdb",
+       secret_key: "vgARyGAN6hHLvX1m+Z3FZ1/GwdTd4pfgnnKYK9oPexUtFsuXaY/s4YFbjOxMMVPj"
+       # Secret key. You can use `mix guardian.gen.secret` to get one
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

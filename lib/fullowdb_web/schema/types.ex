@@ -3,6 +3,7 @@ defmodule FullowdbWeb.Schema.Types do
 
     alias FullowdbWeb.Schema.Types
 
+    import_types Types.SessionTypes
     import_types Types.AccountTypes
     import_types Types.FanshopTypes
     import_types Types.MediaTypes

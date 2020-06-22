@@ -30,6 +30,12 @@ defmodule Fullowdb.Schema do
         resolve &Resolvers.Account.create_user/3
       end
 
+      @desc "Login a user and return a JWT token"
+      field :login_user, type: :session do
+        arg :input, non_null(:session_input)
+        resolve &Resolvers.Session.login_user/3
+      end
+
       @desc "Create a new post"
       field :create_post, type: :post do
        arg :input, non_null(:post_input)
@@ -51,7 +57,7 @@ defmodule Fullowdb.Schema do
 
     object :post_result do
         field :post, :post
-        field :erros, list_of(:input_error)
+        field :errors, list_of(:input_error)
     end
 
     @desc "An error encountered trying to persist input"
