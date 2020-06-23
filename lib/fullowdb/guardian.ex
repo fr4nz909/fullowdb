@@ -2,7 +2,7 @@ defmodule Fullowdb.Guardian do
     use Guardian, otp_app: :fullowdb
     alias Fullowdb.Account
   
-    def subject_for_token(%{Account.User{} = user}, _claims) do
+    def subject_for_token(%Account.User{} = user, _claims) do
       # You can use any value for the subject of your token but
       # it should be useful in retrieving the resource later, see
       # how it being used on `resource_from_claims/1` function.

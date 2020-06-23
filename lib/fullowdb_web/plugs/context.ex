@@ -11,10 +11,10 @@ defmodule FullowdbWeb.Plugs.Context do
     end
 
     defp build_context(conn) do
-        with ["Bearer " <> token] <- get_request_header(conn, "authorization"),
-        {:ok, claims} -> Fullowdb.Guardian.decode_and_verify(token),
-        {:ok, user} <- Fullowdb.Guardian.resource_from_claims(claims) do
-            %{current_user: user}
+        with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+            {:ok, claims} <- Fullowdb.Guardian.decode_and_verify(token),
+            {:ok, user} <- Fullowdb.Guardian.resource_from_claims(claims) do
+                %{current_user: user}
         else
             _ -> %{}
         end
