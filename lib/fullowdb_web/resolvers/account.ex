@@ -1,7 +1,8 @@
 defmodule FullowdbWeb.Resolvers.Account do
     alias Fullowdb.Account
     
-    def list_users(_, args, _) do
+    def list_users(_, args, %{context: context}) do
+        IO.inspect(context)
         {:ok, Account.list_users(args)}
     end
 
