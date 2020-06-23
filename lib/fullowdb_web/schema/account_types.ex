@@ -1,6 +1,7 @@
 defmodule FullowdbWeb.Schema.Types.AccountTypes do
     use Absinthe.Schema.Notation
     alias FullowdbWeb.Resolvers
+    alias FullowdbWeb.Schema.Middleware
 
     object :user_queries do
 
@@ -8,6 +9,7 @@ defmodule FullowdbWeb.Schema.Types.AccountTypes do
         field :users, list_of(:user) do
             arg :matching, :string
             arg :order, type: :sort_order, default_value: :asc
+            middleware(Middleware.Authorize, :any)
             resolve &Resolvers.Account.list_users/3
     end
 
