@@ -4,6 +4,8 @@ defmodule Fullowdb.Schema do
     alias Fullowdb.{Repo, Account.User, Media.Post, Media.Story, Fanshop.Article}
     alias FullowdbWeb.Resolvers
 
+    alias FullowdbWeb.Schema.Middleware
+
     import_types(FullowdbWeb.Schema.Types)
 
     @desc  "The entrypoint to all Queries"
@@ -39,7 +41,8 @@ defmodule Fullowdb.Schema do
       @desc "Create a new post"
       field :create_post, type: :post do
        arg :input, non_null(:post_input)
-       resolve &Resolvers.Media.create_post/3 
+       resolve &Resolvers.Media.create_post/3
+       middleware Middleware.ChangesetErrors
       end
 
       @desc "Create a new story"
