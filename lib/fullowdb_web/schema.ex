@@ -48,13 +48,15 @@ defmodule Fullowdb.Schema do
       @desc "Create a new story"
       field :create_story, type: :story do
         arg :input, non_null(:story_input)
-        resolve &Resolvers.Media.create_story/3 
+        resolve &Resolvers.Media.create_story/3
+        middleware Middleware.ChangesetErrors 
        end
 
        @desc "Create a new article"
        field :create_article, type: :article do
         arg :input, non_null(:article_input)
-        resolve &Resolvers.Fanshop.create_article/3 
+        resolve &Resolvers.Fanshop.create_article/3
+        middleware Middleware.ChangesetErrors 
        end
     end
 

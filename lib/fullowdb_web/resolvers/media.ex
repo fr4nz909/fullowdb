@@ -20,15 +20,8 @@ defmodule FullowdbWeb.Resolvers.Media do
     end
 
     def create_post(_, %{input: params}, _) do
-        case Media.create_post(params) do
-            {:error, changeset} ->
-                {
-                    :error,
-                    message: "could not create post",
-                    details: Helpers.error_details(changeset),
-                }
-                success ->
-                success
+        with {:ok, item} <- Media.create_post(params) do
+            {:ok, %{post: post}}
         end
     end
 
