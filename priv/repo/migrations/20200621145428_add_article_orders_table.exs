@@ -7,7 +7,8 @@ defmodule Fullowdb.Repo.Migrations.AddArticleOrdersTable do
       add :user_id, references(:users), null: false
 
       add :amount, :integer, null: false
-      add :discount, :integer
+      add :discount, :integer, default: 0
+      add :price, :double, null: false
 
       timestamps()
   end

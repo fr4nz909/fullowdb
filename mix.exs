@@ -51,6 +51,7 @@ defmodule Fullowdb.MixProject do
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 2.0"},
+      #{:dataloader, "~> 1.0.0"}
     ]
   end
 

@@ -20,7 +20,7 @@ defmodule FullowdbWeb.Resolvers.Media do
     end
 
     def create_post(_, %{input: params}, _) do
-        with {:ok, item} <- Media.create_post(params) do
+        with {:ok, post} <- Media.create_post(params) do
             {:ok, %{post: post}}
         end
     end

@@ -3,12 +3,12 @@ defmodule FullowdbWeb.Schema.Middleware.ChangesetErrors do
 
     def call(res, _) do
         # to be completed
-        with %{errors: [%Ecto.Changeset{} = changeset]} <-
-            res do
-                %{res |
+        with %{errors: [%Ecto.Changeset{} = changeset]} <- res do
+        %{res |
             value: %{errors: transform_errors(changeset)},
-        errors: [],
+            errors: [],
         }
+        end
     end
 
     defp transform_errors(changeset) do
@@ -18,7 +18,6 @@ defmodule FullowdbWeb.Schema.Middleware.ChangesetErrors do
             {key, value} ->
                 %{key: key, message: value}
             end)
-        end
     end
 
     defp format_error({msg, opts}) do

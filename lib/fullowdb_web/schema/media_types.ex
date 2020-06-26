@@ -37,7 +37,20 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
         field :post_text, :string
         field :post_media, list_of(:string)
         field :inserted_at, :date
+        field :is_premium, :boolean
+
         field :user, :user
+    end
+
+    input_object :post_input do
+        field :post_text, non_null(:string)
+        field :post_media, non_null(list_of(:string))
+        field :is_premium
+    end
+
+    input_object :story_input do
+        field :text, non_null(:string)
+        field :user_id, non_null(:id)
     end
 
     object :story do
@@ -49,7 +62,7 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
         field :name, :string
         field :description, :string
         field :posts, list_of(:post) do
-            resolve &Resolvers.Media.posts_for_tag/3
+        resolve &Resolvers.Media.posts_for_tag/3
         end
     end
 
@@ -63,15 +76,5 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
             _, _ ->
                 nil
             end
-        end
-
-        input_object :post_input do
-            field :text, non_null(:string)
-            field :user_id, non_null(:id)
-        end
-
-        input_object :story_input do
-            field :text, non_null(:string)
-            field :user_id, non_null(:id)
         end
     end

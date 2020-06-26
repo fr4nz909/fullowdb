@@ -24,7 +24,7 @@ defmodule Fullowdb.Media.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:post_text, :post_media, :is_premium])
-    |> validate_required([:post_text])
+    |> cast(attrs, [:post_text, :post_media, :is_premium, :user_id, :tags])
+    |> validate_required([:post_media, :post_text, :is_premium, :user_id])
   end
 end

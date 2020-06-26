@@ -3,7 +3,7 @@ defmodule Fullowdb.Repo.Migrations.AddTagginsTable do
 
   def change do
     create table(:posts_taggings, primary_key: false) do
-      add :post_id, references(:posts), null: false
+      add :post_id, references(:posts, on_delete: :delete_all), null: false
       add :tag_id, references(:tags), null: false
     end
   end
