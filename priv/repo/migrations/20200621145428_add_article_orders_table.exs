@@ -3,7 +3,8 @@ defmodule Fullowdb.Repo.Migrations.AddArticleOrdersTable do
 
   def change do
     create table(:article_orders) do
-      add :user_id, references(:users), null: false
+      add :customer_id, references(:users), null: false
+      add :seller_id, references(:users), null: false 
       add :items, :map
 
       add :ordered_at, :utc_datetime, null: false, default: fragment("NOW()")
