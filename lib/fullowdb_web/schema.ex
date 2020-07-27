@@ -8,6 +8,14 @@ defmodule Fullowdb.Schema do
 
     import_types(FullowdbWeb.Schema.Types)
 
+    def middleware(middleware, _field, %{identifier: :mutation}) do
+      middleware ++ [Middleware.ChangesetErrors]
+    end
+
+    def middleware(middleware, _field, _object) do
+      middleware
+    end
+
     @desc  "The entrypoint to all Queries"
     
     query do
@@ -27,7 +35,7 @@ defmodule Fullowdb.Schema do
       # Mutation fields for writing into database
 
       @desc "Register a new user"
-      field :create_user, type: :user do
+      field :create_user, :user_result do
         arg :input, non_null(:user_input)
         resolve &Resolvers.Account.create_user/3
       end
@@ -39,30 +47,22 @@ defmodule Fullowdb.Schema do
       end
 
       @desc "Create a new post"
-      field :create_post, type: :post do
+      field :create_post, :post_result do
        arg :input, non_null(:post_input)
        resolve &Resolvers.Media.create_post/3
-       middleware Middleware.ChangesetErrors
       end
 
       @desc "Create a new story"
-      field :create_story, type: :story do
+      field :create_story, :story_result do
         arg :input, non_null(:story_input)
-        resolve &Resolvers.Media.create_story/3
-        middleware Middleware.ChangesetErrors 
+        resolve &Resolvers.Media.create_story/3 
        end
 
        @desc "Create a new article"
-       field :create_article, type: :article do
+       field :create_article, :article_result do
         arg :input, non_null(:article_input)
         resolve &Resolvers.Fanshop.create_article/3
-        middleware Middleware.ChangesetErrors 
        end
-    end
-
-    object :post_result do
-        field :post, :post
-        field :errors, list_of(:input_error)
     end
 
     @desc "An error encountered trying to persist input"

@@ -20,14 +20,14 @@ defmodule FullowdbWeb.Schema.Mutation.CreatePostTest do
     @query """
     mutation ($post: PostInput!) {
         createPost(input: $post) {
-            text
+            postText
         }
     }
     """
     test "createPost field creates a post", %{
         user_id: user_id} do
             post = %{
-                "text" => "This is a test post I created via a mutation!",
+                "postText" => "This is a test post I created via a mutation!",
                 "userId" => user_id
             }
             conn = build_conn()
@@ -38,7 +38,7 @@ defmodule FullowdbWeb.Schema.Mutation.CreatePostTest do
             assert json_response(conn, 200) == %{
                 "data" => %{
                     "createPost" => %{
-                        "text" => post["text"],
+                        "postText" => post["text"],
                     }
                 }
             }

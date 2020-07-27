@@ -6,15 +6,8 @@ defmodule FullowdbWeb.Resolvers.Fanshop do
     end
 
     def create_article(_, %{input: params}, _) do
-        case Fanshop.create_article(params) do
-        {:error, changeset} ->
-            {
-                :error,
-                message: "could not create article",
-                details: Helpers.error_details(changeset),
-            }
-            success ->
-            success
+        with {:ok, article} <- Fanshop.create_article(params) do
+            {:ok, %{article: article}}
         end
     end
 end

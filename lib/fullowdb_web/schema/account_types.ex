@@ -17,6 +17,11 @@ defmodule FullowdbWeb.Schema.Types.AccountTypes do
 
     end
 
+    object :user_result do
+        field :user, :user
+        field :errors, list_of(:input_error)
+    end
+
     object :user do
         field :id, :id
         field :username, :string

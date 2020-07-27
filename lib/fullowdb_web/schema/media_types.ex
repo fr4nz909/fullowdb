@@ -1,7 +1,7 @@
 defmodule FullowdbWeb.Schema.Types.MediaTypes do
     use Absinthe.Schema.Notation
-
     alias FullowdbWeb.Resolvers
+    alias FullowdbWeb.Schema.Middleware
 
     @desc "Filtering options for the post list"
     input_object :post_filter do
@@ -32,6 +32,16 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
 
     end
 
+    object :post_result do
+        field :post, :post
+        field :errors, list_of(:input_error)
+    end
+
+    object :story_result do
+        field :story, :story
+        field :errors, list_of(:input_error)
+    end
+
     object :post do
         field :id, :id
         field :post_text, :string
@@ -42,20 +52,32 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
         field :user, :user
     end
 
+    # Works well, but when INPUT is done, the query responses with "null" for the filled fields...
     input_object :post_input do
         field :post_text, non_null(:string)
         field :post_media, non_null(list_of(:string))
-        field :is_premium
+
+        field :user_id, :id
     end
 
+    #add :is_photo, :boolean
+    #add :story_media, :string, null: false
+    #add :story_text, :string
+    #add :is_premium, :boolean, default: false, null: false
+    #
+    #add :user_id, references(:users, on_delete: :delete_all), null: false
+
     input_object :story_input do
-        field :text, non_null(:string)
+        field :story_text, non_null(:string)
+        field :story_media, non_null(:string)
         field :user_id, non_null(:id)
     end
 
     object :story do
         field :id, :id
-        field :text, :string
+        field :story_text, :string
+        field :story_media, :string
+        field :user_id, :id
     end
 
     object :tag do

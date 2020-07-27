@@ -26,11 +26,8 @@ defmodule FullowdbWeb.Resolvers.Media do
     end
 
     def create_story(_, %{input: params}, _) do
-        case Media.create_story(params) do
-        {:error, _} ->
-            {:error, "Could not create Post"}
-        {:ok, _} = success ->
-            success
+        with {:ok, story} <- Media.create_story(params) do
+            {:ok, %{story: story}}
         end
     end
 end

@@ -19,7 +19,7 @@ defmodule Fullowdb.Fanshop.Article do
     @doc false
     def changeset(%Article{} = article, attrs) do
       article
-      |> cast(attrs, [:name, :description, :price, :article_media])
+      |> cast(attrs, [:name, :description, :price, :article_media, :user_id])
       |> validate_required([:name, :description, :price, :article_media])
       |> foreign_key_constraint(:user)
     end

@@ -18,17 +18,22 @@ defmodule FullowdbWeb.Resolvers.Account do
         {:ok, Account.list_users(args)}
     end
 
+    #def create_user(_, %{input: params}, _) do
+    #    case Account.create_user(params) do
+    #        {:error, changeset} ->
+    #            {
+    #                :error,
+    #                message: "could not create user",
+    #            }
+    #            success ->
+    #            success
+    #    end
+    #end
+
     def create_user(_, %{input: params}, _) do
-        case Account.create_user(params) do
-            {:error, changeset} ->
-                {
-                    :error,
-                    message: "could not create user",
-                    details: Helpers.error_details(changeset),
-                }
-                success ->
-                success
-        end
+      with {:ok, user} <- Account.create_user(params) do
+        {:ok, %{user: user}}
+      end
     end
 
     def me(_, _, %{context: %{current_user: current_user}}) do
@@ -37,6 +42,5 @@ defmodule FullowdbWeb.Resolvers.Account do
       def me(_, _, _) do
         {:ok, nil}
       end
-    
-    end
+
 end
