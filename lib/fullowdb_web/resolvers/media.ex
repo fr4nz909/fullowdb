@@ -10,6 +10,10 @@ defmodule FullowdbWeb.Resolvers.Media do
         {:ok, Media.list_posts(args)}
     end
 
+    def list_post(_, %{id: id}, _) do
+        {:ok, Media.list_post!(id)}
+    end
+
     def posts_for_tag(tag, _, _) do
         query = Ecto.assoc(tag, :posts)
         {:ok, Fullowdb.Repo.all(query)}

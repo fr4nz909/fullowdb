@@ -46,6 +46,7 @@ defmodule Fullowdb.Account.User do
   end
 
   defp hash_password(changeset) do
+    IO.inspect changeset
     changeset
   end
 end

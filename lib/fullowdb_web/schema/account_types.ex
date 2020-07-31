@@ -34,6 +34,7 @@ defmodule FullowdbWeb.Schema.Types.AccountTypes do
         field :username, non_null(:string)
         field :email, non_null(:string)
         field :date_of_birth, non_null(:string)
+
         field :password, non_null(:string)
         field :password_confirmation, non_null(:string)
     end

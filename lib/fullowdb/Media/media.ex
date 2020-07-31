@@ -19,9 +19,9 @@ defmodule Fullowdb.Media do
         |> Repo.insert()
     end
 
+    def list_post!(id), do: Repo.get!(Post, id)
+
     def list_posts(user, args) do
-        IO.puts "These are the given arguments: #{inspect(args)}"
-        user
         args
         |> Enum.reduce(Post, fn
             {:order, order}, query ->

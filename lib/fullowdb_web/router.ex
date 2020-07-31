@@ -1,5 +1,6 @@
 defmodule FullowdbWeb.Router do
   use FullowdbWeb, :router
+  alias FullowdbWeb.PageController
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -24,5 +25,11 @@ defmodule FullowdbWeb.Router do
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: Fullowdb.Schema,
       interface: :simple
+  end
+
+  scope  "/web" do
+    pipe_through :browser
+
+    get "/", PageController, :index
   end
 end

@@ -25,10 +25,17 @@ defmodule FullowdbWeb.Schema.Types.MediaTypes do
         field :posts, list_of(:post) do
           arg :filter, non_null(:post_filter)
           arg :order, type: :sort_order, default_value: :asc
+          #middleware(Middleware.Authorize, :any)
           resolve &Resolvers.Media.list_posts/3
       end
 
       #Other Media-related fields
+
+      @desc "Get one Post by its ID"
+      field :post, :post do
+        arg :id, non_null(:integer)
+        resolve &Resolvers.Media.list_post/3
+      end
 
     end
 
