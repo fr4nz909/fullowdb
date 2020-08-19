@@ -1,27 +1,28 @@
-defmodule Fullowdb.Media.Post do
-    use Ecto.Schema
-    import Ecto.Changeset
-    alias Fullowdb.Media.Post
+defmodule Fullowdb.Post do
+  use Fullowdb.Model
 
-    @timestamps_opts [type: :utc_datetime]
+  alias Fullowdb.{Repo, Comment, User}
 
-    @doc  "The list of all available Posts"
-    schema "posts" do
-        field :post_media, {:array, :string}
-        field :post_text, :string
-        
-        timestamps()
+  schema "posts" do
+    field :body, :string
+    field :post_media, {:array, :string}
 
-        belongs_to :user, Fullowdb.Account.User
+    field :price, :float
 
-        many_to_many :tags, Fullowdb.Tagging.Tag,
-          join_through: "posts_taggings"
+    belongs_to :user, User
+    has_many :comments, Comment
+
+    timestamps()
   end
 
-  @doc false
-  def changeset(%Post{} = post, attrs) do
+  def all do
+    Repo.all(from row in __MODULE__, order_by: [desc: row.id])
+  end
+
+  def changeset(post, attrs) do
     post
-    |> cast(attrs, [:post_text, :post_media, :user_id])
-    |> validate_required([:post_media, :post_text])
+    |> cast(attrs, [:body, :post_media, :user_id, :price])    
+    |> validate_required([:body, :post_media, :user_id])
+    |> foreign_key_constraint(:user_id)
   end
 end

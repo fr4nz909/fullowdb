@@ -17,7 +17,6 @@ defmodule Fullowdb.Repo.Migrations.AddUserTable do
 
       add :email, :string
       add :password_hash, :string
-      add :role, :string
 
       timestamps()
     end

@@ -1,7 +1,6 @@
-defmodule FullowdbWeb.Schema.Types.FanshopTypes do
+defmodule FullowdbWeb.Schema.FanshopTypes do
     use Absinthe.Schema.Notation
     alias FullowdbWeb.Resolvers
-    alias FullowdbWeb.Schema.Middleware
 
     @desc "Filtering options for the articles list"
     input_object :article_filter do

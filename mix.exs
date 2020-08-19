@@ -45,13 +45,17 @@ defmodule Fullowdb.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.3"},
-      {:absinthe, "~> 1.4"},
-      {:absinthe_plug, "~> 1.4.0"},
+      {:absinthe, "~> 1.5.0", override: true},
+      {:absinthe_plug, "~> 1.5.0"},
       {:cors_plug, "~> 1.5"},
-      {:comeonin, "~> 4.1.1"},
+      {:comeonin, "~> 5.3"},
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 2.0"},
-      #{:dataloader, "~> 1.0.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:dataloader, "~> 1.0.0"},
+      {:absinthe_phoenix, "~> 2.0.0"},
+      {:new_relic_absinthe, "~> 0.0.4"},
+      {:new_relic_agent, "~> 1.19"},
     ]
   end
 

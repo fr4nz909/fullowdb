@@ -1,7 +1,7 @@
-defmodule Fullowdb.Fanshop.Article do
+defmodule Fullowdb.Article do
     use Ecto.Schema
     import Ecto.Changeset
-    alias Fullowdb.Fanshop.Article
+    alias Fullowdb.Article
     @timestamps_opts [type: :utc_datetime]
 
     @doc  "The list of all available Articles in the Fanshop"

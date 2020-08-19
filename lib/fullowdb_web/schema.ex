@@ -1,93 +1,51 @@
-defmodule Fullowdb.Schema do
-    use Absinthe.Schema
+defmodule FullowdbWeb.Schema do
+  use Absinthe.Schema
 
-    alias Fullowdb.{Repo, Account.User, Media.Post, Media.Story, Fanshop.Article}
-    alias FullowdbWeb.Resolvers
+  alias FullowdbWeb.Data
 
-    alias FullowdbWeb.Schema.Middleware
+  import_types(Absinthe.Type.Custom)
+  import_types(FullowdbWeb.Schema.CommentTypes)
+  import_types(FullowdbWeb.Schema.ConversationTypes)
+  import_types(FullowdbWeb.Schema.MessageTypes)
+  import_types(FullowdbWeb.Schema.PostTypes)
+  import_types(FullowdbWeb.Schema.UserTypes)
 
-    import_types(FullowdbWeb.Schema.Types)
+  query do
+    import_fields(:comment_queries)
+    import_fields(:conversation_queries)
+    import_fields(:message_queries)
+    import_fields(:post_queries)
+    import_fields(:user_queries)
+  end
 
-    def middleware(middleware, _field, %{identifier: :mutation}) do
-      middleware ++ [Middleware.ChangesetErrors]
-    end
+  mutation do
+    import_fields(:comment_mutations)
+    import_fields(:conversation_mutations)
+    import_fields(:message_mutations)
+    import_fields(:post_mutations)
+    import_fields(:user_mutations)
+  end
 
-    def middleware(middleware, _field, _object) do
-      middleware
-    end
+  subscription do
+    import_fields(:comment_subscriptions)
+    import_fields(:conversation_subscriptions)
+    import_fields(:message_subscriptions)
+    import_fields(:post_subscriptions)
+  end
 
-    @desc  "The entrypoint to all Queries"
-    
-    query do
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(Data, Data.data())
 
-      import_fields :post_queries
-      import_fields :user_queries
-      import_fields :article_queries
+    Map.put(ctx, :loader, loader)
+  end
 
-      field :search, list_of(:search_result) do
-        arg :matching, non_null(:string)
-        resolve &Resolvers.Media.search/3
-      end
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
+  end
 
-    end
-
-    mutation do
-      # Mutation fields for writing into database
-
-      @desc "Register a new user"
-      field :create_user, :user_result do
-        arg :input, non_null(:user_input)
-        resolve &Resolvers.Account.create_user/3
-      end
-
-      @desc "Login a user and return a JWT token"
-      field :login_user, type: :session do
-        arg :input, non_null(:session_input)
-        resolve &Resolvers.Session.login_user/3
-      end
-
-      @desc "Create a new post"
-      field :create_post, :post_result do
-       arg :input, non_null(:post_input)
-       resolve &Resolvers.Media.create_post/3
-      end
-
-      @desc "Create a new story"
-      field :create_story, :story_result do
-        arg :input, non_null(:story_input)
-        resolve &Resolvers.Media.create_story/3 
-       end
-
-       @desc "Create a new article"
-       field :create_article, :article_result do
-        arg :input, non_null(:article_input)
-        resolve &Resolvers.Fanshop.create_article/3
-       end
-    end
-
-    @desc "An error encountered trying to persist input"
-    object :input_error do
-      field :key, non_null(:string)
-      field :message, non_null(:string)
-    end
-
-    enum :sort_order do
-      value :asc
-      value :desc
-    end
-
-    scalar :date do
-      parse fn input ->
-        #Parsing the input
-        case Date.from_iso8601(input.value) do
-          {:ok, date} -> {:ok, date}
-          _ -> :error
-        end
-    end
-
-    serialize fn date ->
-      # Serializing logic for output after elixir processing
-      Date.to_iso8601(date)
-    end
+  def middleware(middleware, _field, _object) do
+    [NewRelic.Absinthe.Middleware] ++ middleware
   end
 end

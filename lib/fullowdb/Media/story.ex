@@ -1,7 +1,7 @@
-defmodule Fullowdb.Media.Story do
+defmodule Fullowdb.Story do
     use Ecto.Schema
     import Ecto.Changeset
-    alias Fullowdb.Media.Story
+    alias Fullowdb.Story
 
     @timestamps_opts [type: :utc_datetime]
 

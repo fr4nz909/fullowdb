@@ -4,12 +4,13 @@ defmodule Fullowdb.Repo.Migrations.AddPostTable do
   def change do
     create table(:posts) do
       add :post_media, {:array, :string}
-      add :post_text, :string
-      add :is_premium, :boolean, default: false, null: false
+      add :body, :string
+      add :price, :float, default: 0.0, null: false
 
       add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end
+    create index(:posts, [:user_id])
   end
 end

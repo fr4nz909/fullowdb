@@ -12,5 +12,6 @@ defmodule Fullowdb.Repo.Migrations.AddArticleTable do
 
       timestamps()
     end
+    create index(:articles, [:user_id])
   end
 end

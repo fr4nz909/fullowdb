@@ -1,3 +1,3 @@
-defmodule FullowdbWeb.Schema.Types.TagTypes do
+defmodule FullowdbWeb.Schema.TagTypes do
     use Absinthe.Schema.Notation
 end

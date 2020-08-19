@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :fullowdb, Fullowdb.Repo,
-  username: "franzzetzsch",
-  password: "massiv1E",
+  username: "postgres",
+  password: "postgres",
   database: "fullowdb_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
