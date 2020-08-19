@@ -9,6 +9,7 @@ defmodule FullowdbWeb.Schema do
   import_types(FullowdbWeb.Schema.MessageTypes)
   import_types(FullowdbWeb.Schema.PostTypes)
   import_types(FullowdbWeb.Schema.UserTypes)
+  import_types(FullowdbWeb.Schema.UserFollowingTypes)
 
   query do
     import_fields(:comment_queries)
@@ -16,6 +17,7 @@ defmodule FullowdbWeb.Schema do
     import_fields(:message_queries)
     import_fields(:post_queries)
     import_fields(:user_queries)
+    import_fields(:user_following_queries)
   end
 
   mutation do
@@ -24,6 +26,7 @@ defmodule FullowdbWeb.Schema do
     import_fields(:message_mutations)
     import_fields(:post_mutations)
     import_fields(:user_mutations)
+    import_fields(:user_following_mutations)
   end
 
   subscription do
@@ -31,6 +34,7 @@ defmodule FullowdbWeb.Schema do
     import_fields(:conversation_subscriptions)
     import_fields(:message_subscriptions)
     import_fields(:post_subscriptions)
+    import_fields(:user_following_subscriptions)
   end
 
   def context(ctx) do

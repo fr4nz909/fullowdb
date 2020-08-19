@@ -3,8 +3,8 @@ defmodule Fullowdb.Repo.Migrations.CreateUserFollowings do
 
   def change do
     create table(:user_followings) do
+      add :user_id, references(:users, on_delete: :delete_all), null: false
       add :user_followed_id, references(:users, on_delete: :delete_all), null: false
-      add :user_following_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end

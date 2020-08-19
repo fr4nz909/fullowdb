@@ -19,4 +19,4 @@ defmodule Fullowdb.Comment do
       |> foreign_key_constraint(:post_id)
       |> foreign_key_constraint(:user_id)
     end
-  end
+end

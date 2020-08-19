@@ -56,6 +56,7 @@ defmodule Fullowdb.MixProject do
       {:absinthe_phoenix, "~> 2.0.0"},
       {:new_relic_absinthe, "~> 0.0.4"},
       {:new_relic_agent, "~> 1.19"},
+      {:stripity_stripe, "~> 2.0"},
     ]
   end
 

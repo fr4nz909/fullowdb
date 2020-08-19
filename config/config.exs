@@ -35,3 +35,11 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# Config Stripe API Key
+# config :stripity_stripe, api_key: System.get_env("STRIPE_SECRET")
+# OR
+# config :stripity_stripe, api_key: "YOUR SECRET KEY" pk_test_4Jda2JJ8abo2DOJrnpHmtXGq00z9sKo6uQ
+config :stripity_stripe, api_key: "pk_test_4Jda2JJ8abo2DOJrnpHmtXGq00z9sKo6uQ"
+config :stripity_stripe, hackney_opts: [{:connect_timeout, 1000}, {:recv_timeout, 5000}]
+config :stripity_stripe, :retries, [max_attempts: 3, base_backoff: 500, max_backoff: 2_000]
