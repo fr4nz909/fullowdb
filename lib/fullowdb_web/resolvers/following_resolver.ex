@@ -1,5 +1,17 @@
 defmodule FullowdbWeb.Resolvers.FollowingResolver do
     alias Fullowdb.{Repo, Following, User}
+
+    # list_for_current_user
+    def list_for_current_user(_parent, args, %{
+        context: %{current_user: current_user}
+        }) do
+        user =
+            current_user.id
+            |> User.find()
+            |> Repo.preload(:followings)
+    
+        {:ok, user.followings}
+    end
   
     def list(_parent, args, _resolutions) do
       user =
@@ -9,7 +21,7 @@ defmodule FullowdbWeb.Resolvers.FollowingResolver do
   
       {:ok, user.followings}
     end
-  
+
     def create(_parent, args, %{
           context: %{current_user: current_user}
         }) do

@@ -12,11 +12,20 @@ defmodule FullowdbWeb.Schema.FollowingTypes do
     end
   
     object :following_queries do
-      @desc "Get all followings for a specific user"
-      field :followings, list_of(:following) do
+
+        @desc "Get all followings for the current user"
+        field :current_user_followings, list_of(:following) do
+
+            resolve(&Resolvers.FollowingResolver.list_for_current_user/3)
+        end
+
+        @desc "Get all followings for a specific user"
+        field :followings, list_of(:following) do
         arg(:user_id, non_null(:id))
+
         resolve(&Resolvers.FollowingResolver.list/3)
-      end
+        end
+
     end
   
     object :following_mutations do
