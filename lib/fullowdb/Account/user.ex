@@ -22,6 +22,7 @@ defmodule Fullowdb.User do
 
         has_many :posts, Fullowdb.Post
         has_many :followings, Fullowdb.Following
+        has_many :subscriptions, Fullowdb.Subscription
         has_many :stories, Fullowdb.Story
         has_many :articles, Fullowdb.Article
   end

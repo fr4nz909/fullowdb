@@ -11,6 +11,5 @@ defmodule Fullowdb.Repo.Migrations.CreateFollowings do
 
     create index(:followings, [:user_id], unique: true)
     create index(:followings, [:follower_id], unique: true)
-    create index(:followings, [:user_id, :follower_id], unique: true)
   end
 end

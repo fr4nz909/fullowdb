@@ -1,12 +1,13 @@
 defmodule Fullowdb.Following do
     use Fullowdb.Model
   
-    alias Fullowdb.User
+    alias Fullowdb.{User, Subscription}
   
     schema "followings" do
       belongs_to :user, User
       belongs_to :follower, User
-  
+      belongs_to :subscription, Subscription
+
       timestamps()
     end
   

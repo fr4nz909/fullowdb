@@ -9,6 +9,7 @@ defmodule FullowdbWeb.Schema.FollowingTypes do
     object :following do
       field :user, :user, resolve: dataloader(Data)
       field :follower, :user, resolve: dataloader(Data)
+      field :subscription, :subscription, resolve: dataloader(Data)
     end
   
     object :following_queries do
@@ -32,6 +33,7 @@ defmodule FullowdbWeb.Schema.FollowingTypes do
       @desc "Create following"
       field :create_following, :following do
         arg(:user_id, non_null(:id))
+        arg(:subscription_id, :id)
 
         resolve(&Resolvers.FollowingResolver.create/3)
       end
