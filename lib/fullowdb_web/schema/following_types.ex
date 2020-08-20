@@ -13,7 +13,7 @@ defmodule FullowdbWeb.Schema.FollowingTypes do
   
     object :following_queries do
       @desc "Get all followings for a specific user"
-      field :user_followings, list_of(:following) do
+      field :followings, list_of(:following) do
         arg(:user_id, non_null(:id))
         resolve(&Resolvers.FollowingResolver.list/3)
       end
@@ -23,7 +23,7 @@ defmodule FullowdbWeb.Schema.FollowingTypes do
       @desc "Create following"
       field :create_following, :following do
         arg(:user_id, non_null(:id))
-        
+
         resolve(&Resolvers.FollowingResolver.create/3)
       end
     end

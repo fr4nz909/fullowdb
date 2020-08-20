@@ -21,6 +21,7 @@ defmodule Fullowdb.User do
         many_to_many :conversations, Conversation, join_through: "conversation_users"
 
         has_many :posts, Fullowdb.Post
+        has_many :followings, Fullowdb.Following
         has_many :stories, Fullowdb.Story
         has_many :articles, Fullowdb.Article
   end
