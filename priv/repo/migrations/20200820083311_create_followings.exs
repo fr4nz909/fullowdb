@@ -9,7 +9,6 @@ defmodule Fullowdb.Repo.Migrations.CreateFollowings do
       timestamps()
     end
 
-    create index(:followings, [:user_id], unique: true)
-    create index(:followings, [:follower_id], unique: true)
+    create index(:followings, [:follower_id, :user_id], unique: true)
   end
 end

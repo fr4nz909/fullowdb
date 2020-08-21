@@ -25,6 +25,7 @@ defmodule Fullowdb.Model do
           __MODULE__.__struct__()
           |> changeset(attrs)
         end
+        
       end
     end
   end

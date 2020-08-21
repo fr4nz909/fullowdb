@@ -1,25 +1,25 @@
-defmodule FullowdbWeb.Resolvers.SubscriptionResolver do
-    alias Fullowdb.{Repo, Subscription, User}
+defmodule FullowdbWeb.Resolvers.SubResolver do
+    alias Fullowdb.{Repo, Sub, User}
 
     # list_for_current_user
-    def list_for_current_user(_parent, args, %{
+    def list_for_current_user(_parent, _args, %{
         context: %{current_user: current_user}
         }) do
         user =
             current_user.id
             |> User.find()
-            |> Repo.preload(:subscriptions)
+            |> Repo.preload(:subs)
     
-        {:ok, user.subscriptions}
+        {:ok, user.subs}
     end
   
     def list(_parent, args, _resolutions) do
       user =
         args[:user_id]
         |> User.find()
-        |> Repo.preload(:subscriptions)
+        |> Repo.preload(:subs)
   
-      {:ok, user.subscriptions}
+      {:ok, user.subs}
     end
 
     def create(_parent, args, %{
@@ -27,10 +27,10 @@ defmodule FullowdbWeb.Resolvers.SubscriptionResolver do
         }) do
       args
       |> Map.put(:user_id, current_user.id)
-      |> Subscription.create()
+      |> Sub.create()
       |> case do
-        {:ok, subscription} ->
-          {:ok, subscription}
+        {:ok, sub} ->
+          {:ok, sub}
   
         {:error, changeset} ->
           {:error, extract_error_msg(changeset)}

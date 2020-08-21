@@ -2,7 +2,7 @@ defmodule FullowdbWeb.Resolvers.FollowingResolver do
     alias Fullowdb.{Repo, Following, User}
 
     # list_for_current_user
-    def list_for_current_user(_parent, args, %{
+    def list_for_current_user(_parent, _args, %{
         context: %{current_user: current_user}
         }) do
         user =
